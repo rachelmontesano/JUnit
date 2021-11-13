@@ -27,12 +27,14 @@ public class StringUtils {
 		for (int i = 0; i < message.length(); i++) {
 			char ch = message.charAt(i);
 			if (ch == ' ') {
-				output.append(message);
+				output.append(ch);
 			} else // it's an upper case letter of the alphabet
 			{
 				char newCh = (char) (ch + keyShiftAmount);
 				if (newCh > 'Z') {
 					newCh = (char) (newCh - 26);
+				} else if (newCh < 'A') {
+					newCh = (char) (newCh + 26);
 				}
 				output.append(newCh);
 			}
