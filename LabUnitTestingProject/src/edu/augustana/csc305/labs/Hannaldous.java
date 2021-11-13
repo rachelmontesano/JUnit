@@ -22,39 +22,51 @@ package edu.augustana.csc305.labs;
 
 public class Hannaldous {
 	
-	// method one to do the thing for Monday's meeting 
-	public static int howbad(int n, String[] x, double roXORZ) {
-		int j = x.length - 1;
-		int ret = 0;
-		n = n; // n = ? 
-		for (int i = 0; i < x.length; i = i + 1) 
-		{
-		if (x[j].length() < n || Help(x[j]).equals("y"))
-			ret++;
-	j--;  }
-		return ret;
+	/**
+	 * Parses through a list of passwords and returns the number of bad passwords.
+	 * Passwords are considered bad if they are shorter than the minimum length
+	 * or if they contain any characters other than letters a-z either upper or lower case.
+	 * Calls the method isPasswordOnlyLetters to test if passwords contain non-letter characters.
+	 *  
+	 * @param minLength - the minimum length of the password
+	 * @param passwordList - the ArrayList of passwords
+	 * @return the number of bad passwords
+	 */
+	public static int badPasswords(int minLength, String[] passwordList) {
+		int numBad = 0;
+		for (int i = 0; i < passwordList.length; i++) {
+			if (passwordList[i].length() < minLength || isPasswordOnlyLetters(passwordList[i]).equals("n")) {
+				numBad++;
+			} 
+		}
+		return numBad;
 						}
-	// method two helps, and i wrote it at 11:58 p.m. on sunday... 
-	// couldn't find it on stack overflow, so I rolled my pwn. 
-	static String Help(String MAYBE) 
-	{		
-		int yeah = -1;
-		while (yeah++ < MAYBE.length() - 1) {
-			char izard /*PoKeMoN babee*/ = MAYBE.charAt(yeah); 
-			
-			if (! (izard >= 'a' && izard <='z'|| izard >='A' && izard <= 'Z')) return "n"; }
+	/**
+	 * Tells whether or not a given String password contains characters other than
+	 * letters a-z either upper or lower case.
+	 *  
+	 * @param password - the password to be tested
+	 * @return "y" if the password contains only letters and "n" if not
+	 */
+	static String isPasswordOnlyLetters(String password) {		
+		for (int i = 0; i < password.length(); i++) {
+			char ch = password.charAt(i); 
+			if (! (ch >= 'a' && ch <='z'|| ch >='A' && ch <= 'Z')) {
+				return "n"; 
+			}
+		}
 		return "y";
 	}
 	
 	
 	public static void main(String[] args) {
 		
-		System.out.println(Help("bigmoose$"));
-		System.out.println(Help("emusareawesome"));
-		System.out.println(Help("17"));
+		System.out.println(isPasswordOnlyLetters("bigmoose$"));
+		System.out.println(isPasswordOnlyLetters("emusareawesome"));
+		System.out.println(isPasswordOnlyLetters("17"));
 
 		String[] passwords = new String[] { "bigmoose$", "emusareawesome", "123goodbye", "ok&y", "17", "cat" };
-		System.out.println(howbad(8,passwords, 0.0));
+		System.out.println(badPasswords(8,passwords));
 	}
 
 }
